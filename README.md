@@ -38,19 +38,19 @@ This application consists of:
 ### Build the backend image in cloud shell (it comes with Azure CLI)
 
 1. Start a cloud shell session and enter the following commands:
-    - ```mkdir dreamjob<your-name>```
-    - ```cd dreamjob<your-name>```
-    - ```mkdir backend frontend```
+
+    ```mkdir -p dreamjob<your-name>/{backend,frontend}```
+
 2. Click 'Manage files' in cloud shell and upload the **only the backend files** from the repository that you cloned
-3. In cloud shell, navigate backwards ```cd ..```, ```dir```, until you find the backend files you just uploaded. Move them to the backend folder you created just now in cloud shell.
+3. Move the files to the backend folder you created just now in cloud shell.
     
     ```mv app.py Dockerfile requirements.txt dreamjob<your-name>/backend ```
 
 4. From your dreamjob folder, build the backend image and store it in your registry
 
-    ```az acr build --registry <your-registry-name> --image dreamjob-backend-<your-name>:latest backend/```
+    - ```cd dreamjob<your-name>```
 
-    ```az acr repository list --name <your-registry-name> --output table```
+    - ```az acr build --registry <your-registry-name> --image dreamjob-backend-<your-name>:latest backend/```
 
 ### Deploy the backend container in Azure Container Instances (ACI)
 
@@ -61,7 +61,7 @@ This application consists of:
     - **Region:** *West Europe*
     - **Image source:** *Azure Container Registry*
     - **Registry:** *select the registry you created earlier*
-    - **Image:** *select the image you just built*
+    - **Image:** *select the backend image you just built*
     - **Image tag:** *latest*
     - **DNS name label:** *dreamjob-backend-yourname*
     - **Ports:** *8000*
@@ -72,8 +72,11 @@ This application consists of:
             - Mark as secure: Yes
     - **Create**
 3. Check if the container is in running state
-
-    ```az container show --resource-group <your-resource-group> --name aci-dreamjob-backend-yourname --output table```
+    - In the portal, go to the resource, in the side blade click Settings -> Containers
+    
+    OR
+    
+    - ```az container show --resource-group <your-resource-group> --name aci-dreamjob-backend-yourname --output table```
 
 ### Build the frontend image in cloud shell
 
@@ -82,15 +85,15 @@ This application consists of:
 3. Replace the placeholder BACKEND_URL with the FQDN of the backend container
 4. Save the file
 5. In cloud shell, click 'Manage files' and upload **only the frontend files** from the repository
-6. Navigate backwards ```cd ..``` until you find the frontend files you just uploaded. Move them to the frontend folder in cloud shell
+6. Navigate backwards ```cd ..```, ```dir``` to find the frontend files you just uploaded. Move them to the frontend folder in cloud shell
 
     ```mv script.js Dockerfile index.html dreamjob<your-name>/frontend ```
 
 7. From your dreamjob folder, build the frontend image and store it in your registry
 
-    ```az acr build --registry <your-registry-name> --image dreamjob-frontend-<your-name>:latest frontend/```
+    - ```cd dreamjob<your-name>```
 
-    ```az acr repository list --name <your-registry-name> --output table```
+    - ```az acr build --registry <your-registry-name> --image dreamjob-frontend-<your-name>:latest frontend/```
 
 ### Deploy the frontend container in Azure Container Instances (ACI)
 
@@ -101,23 +104,26 @@ This application consists of:
     - **Region:** *West Europe*
     - **Image source:** *Azure Container Registry*
     - **Registry:** *select the registry you created earlier*
-    - **Image:** *select the image you just built*
+    - **Image:** *select the frontend image you just built*
     - **Image tag:** *latest*
     - **DNS name label:** *dreamjob-yourname*
     - **Ports:** *80*
     - **Ports protocol:** *TCP*
     - **enable container logs:** *NO*
     - **Create**
-3. Check if the container is in running state
+3. Check if the container is in running state:
+    - In the portal, go to the resource, in the side blade click Settings -> Containers
+    
+    OR
 
-    ```az container show --resource-group <your-resource-group> --name aci-dreamjob-frontend-yourname --output table```
+    - ```az container show --resource-group <your-resource-group> --name aci-dreamjob-frontend-yourname --output table```
 
 ## Submit your dream
 
-1. In the frontend Azure Container Instance, copy the FQDN and visit it in your browser
+1. In the portal, go to the frontend Azure Container Instance -> overview, copy the FQDN and visit it in your browser
 2. Submit your dream job (check in the developer console if the request is successful)
 
 ## Clean up
 
-Delete your resources :)
+In the portal, go to the resource group *Knowledge_Sharing_DSAD* and delete the resources you created
 

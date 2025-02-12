@@ -1,4 +1,4 @@
-const BACKEND_URL = "http://<your-backend-container-FQDN>:8000";
+const BACKEND_URL = "http://<insert-backend-container-FQDN>:8000";
 
 document.getElementById("dreamJobForm").addEventListener("submit", async function(event) {
     event.preventDefault();
