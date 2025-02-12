@@ -27,12 +27,13 @@ This application consists of:
 
 1. Navigate to the Azure Portal and login with your kpmgadvisory account
 2. Search for "container registries" in the search bar, and create a new container registry
-    - **Resource group:** *TBD*
+    - **Resource group:** *Knowledge_Sharing_DSAD*
     - **Registry name:** *AcrDreamjob'Your name'*
     - **Location:** *West Europe*
     - **Pricing plan:** *Basic*
-3. When the container registry is created, navigate to Settings -> Access keys and enable Admin user
-4. Navigate back to the resource group and find the storage account. In the side blade, navigate to Security + networking -> Access keys. copy the **connection string** and save it for later.
+    - **Create**
+3. When the container registry is created, go to the resource, navigate to Settings -> Access keys and enable Admin user
+4. Navigate to the resource group *Knowledge_Sharing_DSAD* and go to the storage account. In the side blade, navigate to Security + networking -> Access keys. copy the **connection string** and save it for later.
 
 ### Build the backend image in cloud shell (it comes with Azure CLI)
 
@@ -41,12 +42,12 @@ This application consists of:
     - ```cd dreamjob<your-name>```
     - ```mkdir backend```
     - ```mkdir frontend```
-2. click 'Manage files' and upload the **only the backend files** from the repository that you cloned
-3. in cloud shell, navigate backwards ```cd ..```, until you find the backend files you just uploaded. Move them to the backend folder you created just now in cloud shell.
+2. Click 'Manage files' in cloud shell and upload the **only the backend files** from the repository that you cloned
+3. In cloud shell, navigate backwards ```cd ..```, ```dir```, until you find the backend files you just uploaded. Move them to the backend folder you created just now in cloud shell.
     
     ```mv app.py Dockerfile requirements.txt dreamjob<your-name>/backend ```
 
-4. from your dreamjob folder, build the backendimage and store it in your registry
+4. From your dreamjob folder, build the backend image and store it in your registry
 
     ```az acr build --registry <your-registry-name> --image dreamjob-backend-<your-name>:latest backend/```
 
@@ -54,9 +55,9 @@ This application consists of:
 
 ### Deploy the backend container in Azure Container Instances (ACI)
 
-1. navigate to the Azure Portal
+1. Navigate to the Azure Portal
 2. Search for "container instances" and create a new container instance
-    - **Resource group:** *TBD*
+    - **Resource group:** *Knowledge_Sharing_DSAD*
     - **Name:** *aci-dreamjob-backend-'your name'*
     - **Region:** *West Europe*
     - **Image source:** *Azure Container Registry*
@@ -67,8 +68,10 @@ This application consists of:
     - **Ports:** *8000*
     - **Ports protocol:** *TCP*
     - **enable container logs:** *NO*
-    - **environment variables**: 
-        - **AZURE_STORAGE_CONNECTION_STRING:** *paste the connection string you copied earlier*
+    - **environment variables (key: value)**: 
+        - **AZURE_STORAGE_CONNECTION_STRING:** *paste the connection string you copied earlier from the storage account*
+            - Mark as secure: Yes
+    - **Create**
 3. Check if the container is in running state
 
     ```az container show --resource-group <your-resource-group> --name aci-dreamjob-backend-yourname --output table```
@@ -80,11 +83,11 @@ This application consists of:
 3. Replace the placeholder BACKEND_URL with the FQDN of the backend container
 4. Save the file
 5. In cloud shell, click 'Manage files' and upload **only the frontend files** from the repository
-6. navigate backwards ```cd ..``` until you find the frontend files you just uploaded. Move them to the frontend folder in cloud shell
+6. Navigate backwards ```cd ..``` until you find the frontend files you just uploaded. Move them to the frontend folder in cloud shell
 
     ```mv script.js Dockerfile index.html dreamjob<your-name>/frontend ```
 
-7. from your dreamjob folder, build the frontend image and store it in your registry
+7. From your dreamjob folder, build the frontend image and store it in your registry
 
     ```az acr build --registry <your-registry-name> --image dreamjob-frontend-<your-name>:latest frontend/```
 
@@ -92,9 +95,9 @@ This application consists of:
 
 ### Deploy the frontend container in Azure Container Instances (ACI)
 
-1. navigate to the Azure Portal
+1. Navigate to the Azure Portal
 2. Search for "container instances" and create a new container instance
-    - **Resource group:** *TBD*
+    - **Resource group:** *Knowledge_Sharing_DSAD*
     - **Name:** *aci-dreamjob-frontend-'your name'*
     - **Region:** *West Europe*
     - **Image source:** *Azure Container Registry*
@@ -105,6 +108,7 @@ This application consists of:
     - **Ports:** *80*
     - **Ports protocol:** *TCP*
     - **enable container logs:** *NO*
+    - **Create**
 3. Check if the container is in running state
 
     ```az container show --resource-group <your-resource-group> --name aci-dreamjob-frontend-yourname --output table```
