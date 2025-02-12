@@ -40,8 +40,7 @@ This application consists of:
 1. Start a cloud shell session and enter the following commands:
     - ```mkdir dreamjob<your-name>```
     - ```cd dreamjob<your-name>```
-    - ```mkdir backend```
-    - ```mkdir frontend```
+    - ```mkdir backend frontend```
 2. Click 'Manage files' in cloud shell and upload the **only the backend files** from the repository that you cloned
 3. In cloud shell, navigate backwards ```cd ..```, ```dir```, until you find the backend files you just uploaded. Move them to the backend folder you created just now in cloud shell.
     

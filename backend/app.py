@@ -6,6 +6,7 @@ import json
 import os
 import azure.core.exceptions
 
+
 app = FastAPI()
 
 # Add CORS middleware
@@ -23,8 +24,10 @@ CONTAINER_NAME = "dreamjobs"
 BLOB_NAME = "jobs.json"
 
 blob_service_client = BlobServiceClient.from_connection_string(CONNECTION_STRING)
-blob_service_client.create_container(CONTAINER_NAME, exist_ok=True)
-container_client = blob_service_client.get_container_client(CONTAINER_NAME)
+try:
+    blob_service_client.create_container(CONTAINER_NAME)
+except azure.core.exceptions.ResourceExistsError:
+    container_client = blob_service_client.get_container_client(CONTAINER_NAME)
 
 class DreamJob(BaseModel):
     name: str
