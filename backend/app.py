@@ -5,9 +5,6 @@ from azure.storage.blob import BlobServiceClient
 import json
 import os
 import azure.core.exceptions
-from dotenv import load_dotenv
-
-load_dotenv()  # Add this line before accessing env variables
 
 app = FastAPI()
 
@@ -26,12 +23,8 @@ CONTAINER_NAME = "dreamjobs"
 BLOB_NAME = "jobs.json"
 
 blob_service_client = BlobServiceClient.from_connection_string(CONNECTION_STRING)
-
-# Ensure container exists
-try:
-    container_client = blob_service_client.create_container(CONTAINER_NAME)
-except azure.core.exceptions.ResourceExistsError:
-    container_client = blob_service_client.get_container_client(CONTAINER_NAME)
+container_client = blob_service_client.get_container_client(CONTAINER_NAME)
+container_client.create_container(exist_ok=True)
 
 class DreamJob(BaseModel):
     name: str
@@ -48,10 +41,6 @@ def get_jobs_from_blob():
 def save_jobs_to_blob(jobs):
     blob_client = container_client.get_blob_client(BLOB_NAME)
     blob_client.upload_blob(json.dumps(jobs), overwrite=True)
-
-@app.get("/jobs")
-def get_jobs():
-    return get_jobs_from_blob()
 
 @app.post("/submit")
 def submit_job(dream_job: DreamJob):

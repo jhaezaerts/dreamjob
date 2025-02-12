@@ -31,25 +31,3 @@ document.getElementById("dreamJobForm").addEventListener("submit", async functio
         alert("There was an error submitting your dream job. Please try again.");
     }
 });
-
-// Fetch and display dream jobs
-async function fetchJobs() {
-    try {
-        const response = await fetch(`${BACKEND_URL}/jobs`);
-        const jobs = await response.json();
-
-        const jobList = document.getElementById("jobList");
-        jobList.innerHTML = "";
-
-        jobs.forEach(entry => {
-            const li = document.createElement("li");
-            li.textContent = entry.job;
-            jobList.appendChild(li);
-        });
-    } catch (error) {
-        console.error("Error fetching jobs:", error);
-    }
-}
-
-// Initially fetch jobs
-fetchJobs();
