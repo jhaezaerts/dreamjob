@@ -39,7 +39,7 @@ This application consists of:
 
 ### Build the backend image in cloud shell (it comes with Azure CLI)
 
-1. Start a cloud shell session and enter the following commands:
+1. Start a cloud shell session (no storage account needed) and enter the following commands:
 
     ```mkdir -p dreamjob<your-name>/{backend,frontend}```
 
