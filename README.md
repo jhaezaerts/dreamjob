@@ -9,19 +9,19 @@ This application consists of:
 ### Frontend
 - Simple HTML/JS interface with a modern, gradient design
 - Form to submit dream job entries
-- Success notifications and job display functionality
+- Success notification
 
 ### Backend
 - FastAPI server handling job submissions
-- Azure Blob Storage for data persistence
-- CORS-enabled API endpoints
+- Azure Blob Storage for data persistence (dreamjob entries)
+- CORS-enabled API endpoint
 
 ## Setup Instructions
 
 ### Get the source code
 1. Create a new folder for the project titled *Container App 'Your name'*
 2. Open this folder in VS Code
-3. press ctrl+shift+ù and paste ```git clone https://github.com/jhaezaerts/dreamjob.git```
+3. press ctrl+shift+ù to open the terminal and paste ```git clone https://github.com/jhaezaerts/dreamjob.git```
 4. Access the Azure portal and login with your kpmgadvisory account
 
 ## Project Instructions
@@ -122,8 +122,8 @@ This application consists of:
 
 ## Submit your dream
 
-1. In the portal, go to the frontend Azure Container Instance -> overview, copy the FQDN and visit it in your browser
-2. Submit your dream job (check in the developer console if the request is successful)
+1. In the portal, go to the frontend Azure Container Instance -> overview, copy the FQDN and paste it in your browser
+2. Submit your dream job
 
 ## Clean up
 
