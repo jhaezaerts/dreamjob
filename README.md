@@ -22,18 +22,20 @@ This application consists of:
 1. Create a new folder for the project titled *Container App 'Your name'*
 2. Open this folder in VS Code
 3. press ctrl+shift+ù and paste ```git clone https://github.com/jhaezaerts/dreamjob.git```
+4. Access the Azure portal and login with your kpmgadvisory account
+
+## Project Instructions
 
 ### Create your Azure Container Registry (ACR)
 
-1. Navigate to the Azure Portal and login with your kpmgadvisory account
-2. Search for "container registries" in the search bar, and create a new container registry
+1. Search for "container registries" in the search bar of the Azure portal, and create a new container registry
     - **Resource group:** *Knowledge_Sharing_DSAD*
     - **Registry name:** *AcrDreamjob'Your name'*
     - **Location:** *West Europe*
     - **Pricing plan:** *Basic*
     - **Create**
-3. When the container registry is created, go to the resource, navigate to Settings -> Access keys and enable Admin user
-4. Navigate to the resource group *Knowledge_Sharing_DSAD* and go to the storage account. In the side blade, navigate to Security + networking -> Access keys. copy the **connection string** and save it for later.
+2. When the container registry is created, go to the resource, navigate to Settings -> Access keys and enable Admin user
+3. Navigate to the resource group *Knowledge_Sharing_DSAD* and go to the storage account. In the side blade, navigate to Security + networking -> Access keys. copy the **connection string** and save it for later.
 
 ### Build the backend image in cloud shell (it comes with Azure CLI)
 
