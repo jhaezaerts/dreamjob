@@ -22,7 +22,7 @@ This application consists of:
 1. Create a new folder for the project titled *Container App 'Your name'*
 2. Open this folder in VS Code
 3. press ctrl+shift+ù to open the terminal and paste ```git clone https://github.com/jhaezaerts/dreamjob.git```
-4. Access the Azure portal and login with your kpmgadvisory account
+4. Access the [Azure portal](https://portal.azure.com/) and login with your kpmgadvisory account
 
 ## Project Instructions
 
@@ -39,7 +39,7 @@ This application consists of:
 
 ### Build the backend image in cloud shell (it comes with Azure CLI)
 
-1. Start a cloud shell session (no storage account needed) and enter the following commands:
+1. Start a cloud shell session - no storage account needed, pick bash - and enter the following command:
 
     ```mkdir -p dreamjob<your-name>/{backend,frontend}```
 
